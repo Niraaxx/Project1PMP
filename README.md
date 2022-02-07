@@ -2,5 +2,5 @@
 Project 1 in PMP
 
 
-Workers : - DUHAMMEL Elodie TP2A
+Workers : - DUHAMEL Elodie TP2A
           - CRUSSARD Tanguy TP2A
