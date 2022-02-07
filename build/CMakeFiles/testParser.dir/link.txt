@@ -1,0 +1,1 @@
+/usr/bin/c++    -fsanitize=address,undefined CMakeFiles/testParser.dir/Option.cc.o CMakeFiles/testParser.dir/Parser.cc.o CMakeFiles/testParser.dir/testParser.cc.o  -o testParser  libgoogletest1.a -lpthread 

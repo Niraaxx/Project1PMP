@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/AD/tcrussar/DossierPartage/S6/PMP/TP1/parser/Option.cc
+Option.h
+/home/AD/tcrussar/DossierPartage/S6/PMP/TP1/parser/Option.h
+stdexcept
+-
+
+/home/AD/tcrussar/DossierPartage/S6/PMP/TP1/parser/Option.h
+string
+-
+vector
+-
+

@@ -1,0 +1,5 @@
+if(EXISTS "/home/AD/tcrussar/DossierPartage/S6/PMP/TP1/parser/build/testParser[1]_tests.cmake")
+  include("/home/AD/tcrussar/DossierPartage/S6/PMP/TP1/parser/build/testParser[1]_tests.cmake")
+else()
+  add_test(testParser_NOT_BUILT testParser_NOT_BUILT)
+endif()
