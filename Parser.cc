@@ -5,22 +5,36 @@
 
 namespace op {
   void Parser::parseCommandLine(int argc, const char* const argv[]) {
-    // TODO: not yet implemented
+    /*for(int i =0; i<=argc;i++){
+      if((argv[i+1][0] == "-" || argv[i+1][1] == "-"){
+        options.push_back(argv[i+1]);
+      }else{
+        argPositionnels.push_back(argv[i+1]);
+      }
+    }*/
   }
 
   void Parser::printHelp(std::ostream& stream) const {
-    // TODO: not yet implemented
+    stream << "Usage:\n";
+    /*for(int i =0; i< argc ;i++){
+      stream << "\t--" << argv[i+1] << "\n"
+    }*/
+
+    stream << "\t --help|-h\n";
   }
 
   std::size_t Parser::getPositionalArgumentCount() const {
-    // TODO: not yet implemented
+    return argPositionnels.size();
   }
 
   Option& Parser::operator()(const std::string& name) {
-    // TODO: not yet implemented
+    auto result = std::find(begin(options),end(options),name);
+    if(result != std::end(options)){
+      return *result;
+    }
   }
 
   const std::string& Parser::operator[](std::size_t i) const {
-    // TODO: not yet implemented
+    return argPositionnels.at(i);
   }
 }

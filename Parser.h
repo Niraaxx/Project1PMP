@@ -15,6 +15,10 @@ namespace op {
 
     Option& operator()(const std::string& name);
     const std::string& operator[](std::size_t i) const;
+
+  private: 
+    std::vector<Option> options;
+    std::vector<std::string> argPositionnels;
   };
 }
 
