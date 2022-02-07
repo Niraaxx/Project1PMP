@@ -15,99 +15,100 @@ TEST(OptionTest,OptionTestConstructorGood){
   EXPECT_EQ("help",test[0]);
 }
 
-TEST(OptionTest,OptionTestConstructorGoodWithManyNames){
+TEST(OptionTestConstructorGoodWithManyNames,OptionTest){
+  Option opt=Option("command");
+  Option opt2=Option("help");
+  std::vector<std::string> test = opt.getNames();
+  EXPECT_EQ("command",test[0]);
+
   
 }
 
-TEST(OptionTest,OptionTestGetNames){
+TEST(OptionTestGetNames,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestGetNamesWithManyNames){
+TEST(OptionTestGetNamesWithManyNames,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestGetValue){
+TEST(OptionTestGetValue,OptionTest){
   
 }
 
-TEST(OptionTest,OptionTestExpectValueTrue){
+TEST(OptionTestExpectValueTrue,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestExpectValueFalse){
+TEST(OptionTestExpectValueFalse,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestSetDefaultValue){
+TEST(OptionTestSetDefaultValue,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTesthasValue){
+TEST(OptionTesthasValue,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestAddAlias){
+TEST(OptionTestAddAlias,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestAddManyAlias){
+TEST(OptionTestAddManyAlias,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestSetMandatoryTrue){
+TEST(OptionTestSetMandatoryTrue,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestSetMandatoryFalse){
+TEST(OptionTestSetMandatoryFalse,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestIsMandatoryTrue){
+TEST(OptionTestIsMandatoryTrue,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestIsMandatoryFalse){
+TEST(OptionTestIsMandatoryFalse,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestParsed){
+TEST(OptionTestParsed,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestOperatorEQEQTrue){
+TEST(OptionTestOperatorEQEQTrue,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestOperatorEQEQFalse){
+TEST(OptionTestOperatorEQEQFalse,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestOperatorDiffTrue){
+TEST(OptionTestOperatorDiffTrue,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestOperatorDiffFalse){
+TEST(OptionTestOperatorDiffFalse,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestOperatorEQTrue){
+TEST(OptionTestOperatorEQTrue,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestOperatorEQFalse){
+TEST(OptionTestOperatorEQFalse,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestOperatorEQEQTrue){
+TEST(OptionTestOperatorBoolTrue,OptionTest){
 
 }
 
-TEST(OptionTest,OptionTestOperatorBoolTrue){
-
-}
-
-TEST(OptionTest,OptionTestOperatorBoolFalse){
+TEST(OptionTestOperatorBoolFalse,OptionTest){
 
 }
 
