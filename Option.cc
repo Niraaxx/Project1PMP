@@ -14,7 +14,14 @@ namespace op {
   }
 
   const std::string& Option::getValue() const {
+    if(val == ""){
+      throw std::runtime_error("Need a value");
+    }else if(needValue == false){
+      throw std::runtime_error("No need a value");
+    }
+    else{
     return val;
+    }
   }
 
   bool Option::expectValue() const {
@@ -22,6 +29,7 @@ namespace op {
   }
 
   Option& Option::setDefaultValue(const std::string& value) {
+    needValue = true;
     val = value;
     return *this;
   }

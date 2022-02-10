@@ -5,6 +5,11 @@
 
 namespace op {
   void Parser::parseCommandLine(int argc, const char* const argv[]) {
+    for(int i = 0;i < options.size();i++){
+      if(options[i].isMandatory() /* And not parsed*/){
+        throw std::runtime_error("Option mandatory not parsed");
+      }
+    }
     /*for(int i =0; i<=argc;i++){
       if((argv[i+1][0] == "-" || argv[i+1][1] == "-"){
         options.push_back(argv[i+1]);

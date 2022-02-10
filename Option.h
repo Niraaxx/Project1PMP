@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include <iterator>
+#include <stdexcept>
 
 namespace op {
   class Option {
