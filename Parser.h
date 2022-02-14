@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <vector>
+#include <string.h>
+#include <regex.h>
 
 #include "Option.h"
 
@@ -16,7 +18,9 @@ namespace op {
     Option& operator()(const std::string& name);
     const std::string& operator[](std::size_t i) const;
 
-  private: 
+  private:
+    Option& Parser::parser(const std::string& name);
+    Parser::Parser();
     std::vector<Option> options;
     std::vector<std::string> argPositionnels;
   };
