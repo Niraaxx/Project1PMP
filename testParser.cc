@@ -15,7 +15,7 @@ TEST(OptionTest,OptionTestConstructorGood){
   EXPECT_EQ("help",test[0]);
 }
 
-TEST(OptionTestConstructorGoodWithManyNames,OptionTest){
+TEST(OptionTest,OptionTestConstructorGoodWithManyNames){
   Option opt=Option("command");
   Option opt2=Option("help");
   std::vector<std::string> test = opt.getNames();
@@ -26,126 +26,242 @@ TEST(OptionTestConstructorGoodWithManyNames,OptionTest){
   
 }
 
-TEST(OptionTestGetNames,OptionTest){
+TEST(OptionTest,OptionTestGetNames){
+  Option opt=Option("command");
+  opt.addAlias("cmd");
+  std::vector<std::string> test = opt.getNames();
+  EXPECT_EQ("command",test[0]);
+  EXPECT_EQ("cmd",test[1]);
 }
 
-TEST(OptionTestGetNamesWithManyNames,OptionTest){
-  
+TEST(OptionTest,OptionTestGetNamesWithManyNames){
+  Option opt=Option("command");
+  opt.addAlias("cmd");
+  opt.addAlias("c");
+  std::vector<std::string> test = opt.getNames();
+  EXPECT_EQ("command",test[0]);
+  EXPECT_EQ("cmd",test[1]);
+  EXPECT_EQ("c",test[2]);
+}
+TEST(OptionTest,OptionTestGetNamesError){
+  Option opt=Option("command");
+  opt.addAlias("cmd");
+  opt.addAlias("c");
+  std::vector<std::string> test = opt.getNames();
+  EXPECT_NE("h",test[1]);
+  EXPECT_NE("c",test[0]);
 
 
 }
 
-TEST(OptionTestGetValue,OptionTest){
+TEST(OptionTest,OptionTestGetValue){
   Option opt=Option("command");
   opt.setDefaultValue("c");
   std::string test = opt.getValue();
   EXPECT_EQ("c",test);
+  EXPECT_NE("v",test);
   
 }
-TEST(OptionTestGetNoValue,OptionTest){
-  // Option opt=Option("command");
-  // std::string test = opt.getValue();
-  //EXPECT_EQ(std::runtime_error,test);
-  
-}
-
-TEST(OptionTestExpectValueTrue,OptionTest){
-  // Option opt=Option("command");
-  // opt.operator=("c");
-  // EXPECT_TRUE(opt.expectValue());
-
-}
-
-TEST(OptionTestExpectValueFalse,OptionTest){
+TEST(OptionTest,OptionTestGetNoValue){
   Option opt=Option("command");
-  EXPECT_FALSE(opt.expectValue());
-
+  EXPECT_THROW({opt.getValue();},std::runtime_error);
 }
-
-TEST(OptionTestSetDefaultValue,OptionTest){
+TEST(OptionTest,OptionTestGetNoValue2){
   Option opt=Option("command");
-  opt.setDefaultValue("c");
-  std::string test=opt.getValue();
-  EXPECT_EQ("c",test);
+  opt.setDefaultValue("");
+  EXPECT_THROW({opt.getValue();},std::runtime_error);
 }
 
-TEST(OptionTesthasValue,OptionTest){
+TEST(OptionTest,OptionTestExpectValueTrue){
   Option opt=Option("command");
   opt.setDefaultValue("c");
   EXPECT_TRUE(opt.expectValue());
 
 }
 
-TEST(OptionTestAddAlias,OptionTest){
+TEST(OptionTest,OptionTestExpectValueFalse){
+  Option opt=Option("command");
+  EXPECT_FALSE(opt.expectValue());
+
+}
+
+TEST(OptionTest,OptionTestSetDefaultValue){
+  Option opt=Option("command");
+  opt.setDefaultValue("c");
+  std::string test=opt.getValue();
+  EXPECT_EQ("c",test);
+}
+
+TEST(OptionTest,OptionTesthasValue){
+  Option opt=Option("command");
+  opt.setDefaultValue("c");
+  EXPECT_TRUE(opt.expectValue());
+
+}
+
+TEST(OptionTest,OptionTestAddAlias){
   Option opt = Option("help");
-  opt.addAlias("-h");
+  opt.addAlias("h");
   std::vector<std::string> test = opt.getNames();
   EXPECT_EQ("help",test[0]);
-  EXPECT_EQ("-h",test[1]);
+  EXPECT_EQ("h",test[1]);
 
 }
 
-TEST(OptionTestAddManyAlias,OptionTest){
+TEST(OptionTest,OptionTestAddManyAlias){
   Option opt = Option("help");
-  opt.addAlias("-h");
-  opt.addAlias("--help");
+  opt.addAlias("h");
+  opt.addAlias("help_need");
   std::vector<std::string> test = opt.getNames();
 
   EXPECT_EQ("help",test[0]);
-  EXPECT_EQ("-h",test[1]);
-  EXPECT_EQ("--help",test[2]);
+  EXPECT_EQ("h",test[1]);
+  EXPECT_EQ("help_need",test[2]);
 
 }
 
-TEST(OptionTestSetMandatoryTrue,OptionTest){
+TEST(OptionTest,OptionTestSetMandatoryTrue){
+  Option opt=Option("command");
+  opt.setDefaultValue("c");
+  opt.setMandatory();
+  EXPECT_TRUE(opt.isMandatory());
 
 }
 
-TEST(OptionTestSetMandatoryFalse,OptionTest){
+TEST(OptionTest,OptionTestSetMandatoryFalse){
+  Option opt=Option("command");
+  opt.setDefaultValue("c");
+  EXPECT_FALSE(opt.isMandatory());
 
 }
 
-TEST(OptionTestIsMandatoryTrue,OptionTest){
+TEST(OptionTest,OptionTestIsMandatoryTrue){
+  Option opt=Option("command");
+  opt.setDefaultValue("c");
+  opt.setMandatory();
+  EXPECT_TRUE(opt.isMandatory());
+}
+
+TEST(OptionTest,OptionTestIsMandatoryFalse){
+  Option opt=Option("command");
+  opt.setDefaultValue("c");
+  EXPECT_FALSE(opt.isMandatory());
+}
+
+TEST(OptionTest,OptionTestParsed){
+  Option opt=Option("command");
+  opt.parsed();
+  EXPECT_TRUE(opt.operator bool());
+
+}
+TEST(OptionTest,OptionTestNotParsed){
+  Option opt=Option("command");
+  EXPECT_FALSE(opt.operator bool());
 
 }
 
-TEST(OptionTestIsMandatoryFalse,OptionTest){
+TEST(OptionTest,OptionTestOperatorEQEQTrue){
+  Option opt=Option("command");
+  EXPECT_TRUE(opt.operator==("command"));
+}
+
+TEST(OptionTest,OptionTestOperatorEQEQTrueAlias){
+  Option opt=Option("command");
+  opt.addAlias("cmd");
+  EXPECT_TRUE(opt.operator==("cmd"));
+}
+
+ 
+TEST(OptionTest,OptionTestOperatorEQEQFalse){
+  Option opt=Option("commande");
+  EXPECT_FALSE(opt.operator==("command"));
+}
+
+TEST(OptionTest,OptionTestOperatorEQEQFalseAlias){
+  Option opt=Option("command");
+  opt.addAlias("cmde");
+  EXPECT_FALSE(opt.operator==("cmd"));
+}
+
+
+TEST(OptionTest,OptionTestOperatorDiffTrue){
+  Option opt=Option("command");
+  EXPECT_TRUE(opt.operator!=("cmd"));
+  
+}
+
+TEST(OptionTest,OptionTestOperatorDiffFalse){
+  Option opt=Option("command");
+  EXPECT_FALSE(opt.operator!=("command")); 
+}
+TEST(OptionTest,OptionTestOperatorDiffTrueAlias){
+  Option opt=Option("command");
+  opt.addAlias("cmd");
+  EXPECT_TRUE(opt.operator!=("cmde"));
+  
+}
+
+TEST(OptionTest,OptionTestOperatorDiffFalseAlias){
+  Option opt=Option("command");
+  opt.addAlias("cmd");
+  EXPECT_FALSE(opt.operator!=("cmd")); 
+}
+
+TEST(OptionTest,OptionTestOperatorEQTrue){
+  Option opt=Option("command");
+  opt.setDefaultValue("c");
+  opt.operator=("d");
+  EXPECT_EQ("d",opt.getValue());
+  opt.operator=("f");
+  EXPECT_EQ("f",opt.getValue());
+}
+
+TEST(OptionTest,OptionTestOperatorEQFalse){
+  Option opt=Option("command");
+  opt.setDefaultValue("c");
+  opt.operator=("d");
+  EXPECT_NE("c",opt.getValue());
 
 }
 
-TEST(OptionTestParsed,OptionTest){
+TEST(OptionTest,OptionTestOperatorBoolTrue){
+  Option opt=Option("command");
+  opt.parsed();
+  EXPECT_TRUE(opt.operator bool());
 
 }
 
-TEST(OptionTestOperatorEQEQTrue,OptionTest){
+TEST(OptionTest,OptionTestOperatorBoolFalse){
+  Option opt=Option("command");
+  EXPECT_FALSE(opt.operator bool());
+}
+TEST(ParserTest,ParserTestContructor){
+//   Parser parser;
+//   parser("azert");
+//   const char* argv[] = {
+// " command " ,
+// " --option " ,
+// " bar " ,
+// " -a " ,
+// " pos1 " ,
+// " pos2 "
+// };
+//   parser.parseCommandLine(6,argv);
+//   EXPECT_FALSE(parser("azert"));
+  
 
 }
 
-TEST(OptionTestOperatorEQEQFalse,OptionTest){
+TEST(ParserTest,ParserTestparserCommandLine){
 
 }
 
-TEST(OptionTestOperatorDiffTrue,OptionTest){
+TEST(ParserTest,ParserTestgetPositionalArgumentCount){
 
 }
-
-TEST(OptionTestOperatorDiffFalse,OptionTest){
-
-}
-
-TEST(OptionTestOperatorEQTrue,OptionTest){
+TEST(ParserTest,ParserTestOperator1){
 
 }
-
-TEST(OptionTestOperatorEQFalse,OptionTest){
-
-}
-
-TEST(OptionTestOperatorBoolTrue,OptionTest){
+TEST(ParserTest,ParserTestOperator2){
 
 }
-
-TEST(OptionTestOperatorBoolFalse,OptionTest){
-
-}
-
