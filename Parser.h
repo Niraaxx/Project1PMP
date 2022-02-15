@@ -11,6 +11,7 @@
 namespace op {
   class Parser {
   public:
+    Parser();
     void parseCommandLine(int argc, const char* const argv[]);
     void printHelp(std::ostream& stream = std::cout) const;
     std::size_t getPositionalArgumentCount() const;
@@ -19,8 +20,7 @@ namespace op {
     const std::string& operator[](std::size_t i) const;
 
   private:
-    Option& Parser::parser(const std::string& name);
-    Parser::Parser();
+    
     std::vector<Option> options;
     std::vector<std::string> argPositionnels;
   };
